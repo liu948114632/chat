@@ -14,6 +14,8 @@ import com.zhgtrade.websocket.WebSocketChat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+
+import javax.annotation.PostConstruct;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -50,6 +52,7 @@ public class PrivateChatMsgStorage {
 
     private SessionManager sessionManager = SessionManager.getSessionManager();
 
+    @PostConstruct
     public void work(){
         for (int i = 0; i < 8; i++) {
             fixedThreadPool.execute(new Runnable() {

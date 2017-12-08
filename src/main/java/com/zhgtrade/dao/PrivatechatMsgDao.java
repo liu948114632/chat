@@ -8,6 +8,7 @@ import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigInteger;
@@ -21,6 +22,7 @@ import java.util.Map;
  * @copyright www.zhgtrade.com
  */
 @Repository
+@Transactional
 public class PrivatechatMsgDao {
     private static final Logger log = LoggerFactory
             .getLogger(PrivatechatMsgDao.class);
@@ -33,7 +35,7 @@ public class PrivatechatMsgDao {
 
     public void save(PrivatechatMsg transientInstance) {
         try {
-            getSession().save("PrivatechatMsg",transientInstance);
+            getSession().save(transientInstance);
             log.debug("save successful");
         } catch (RuntimeException re) {
             log.error("save failed", re);
