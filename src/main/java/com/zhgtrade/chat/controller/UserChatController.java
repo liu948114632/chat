@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +24,7 @@ import java.util.Map;
  */
 @RequestMapping("/dope")
 @RestController
-public class UserChatController{
+public class UserChatController extends BaseController {
     @Autowired
     private PrivatechatMsgService privatechatMsgService;
     @Autowired
@@ -61,11 +60,7 @@ public class UserChatController{
             }
         }
 
-        Map result = new HashMap();
-        result.put("data",list);
-        result.put("count",count);
-        result.put("start",start);
-        return result;
+        return forSuccessResult(list, count, start);
     }
 
 
@@ -94,11 +89,7 @@ public class UserChatController{
             map.put("phone",fuser.getFtelephone());
             map.put("rank",fuser.isRank());
         }
-        Map result = new HashMap();
-        result.put("data",list);
-        result.put("count",count);
-        result.put("start",start);
-        return result;
+        return forSuccessResult(list, count, start);
     }
 
     /**
@@ -109,9 +100,7 @@ public class UserChatController{
     @RequestMapping(value = "/getChatMsgCount")
     public Object getChatMsgCount(int userId) {
         int count = privatechatService.findChatMsgCount(userId);
-        Map result = new HashMap();
-        result.put("count",count);
-        return result;
+        return forSuccessResult(count);
     }
 
     @RequestMapping(value = "/getChatCustomServer")
@@ -130,9 +119,7 @@ public class UserChatController{
                 }
             }
         }
-        Map result = new HashMap();
-        result.put("data",list);
-        return result;
+        return forSuccessResult(list);
     }
 
 
