@@ -18,11 +18,12 @@ public class WebSocketChat {
 
 	@OnOpen
 	public void onOpen(Session session, @PathParam(value="param") String userId, EndpointConfig config)throws Exception{
-//		if(userId.equals(config.getUserProperties().get("userid").toString())){
+		session.getUserProperties().get("userid");
+		if(userId.equals(config.getUserProperties().get("userid").toString())){
 			sessionManager.addSession(session,userId);
-//		}else {
+		}else {
 //			throw new Exception();
-//		}
+		}
 	}
 
 	@OnClose

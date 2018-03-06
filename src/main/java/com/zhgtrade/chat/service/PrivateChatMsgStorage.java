@@ -182,6 +182,7 @@ public class PrivateChatMsgStorage {
             }else{
                 privatechat.setNum(privatechat.getNum()+1);
             }
+            privatechat.setStatus(status);
             privatechat.setOnline(status);
             privatechat.setUpdateTime(new Timestamp(new Date().getTime()));
             this.privatechatService.update(privatechat);
